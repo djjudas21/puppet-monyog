@@ -1,0 +1,14 @@
+{
+  "name": "jgazeley/monyog",
+  "version": "0.1.0",
+  "author": "jgazeley",
+  "summary": "Install and configure MONyog",
+  "license": "Apache-2.0",
+  "source": "https://github.com/djjudas21/puppet-monyog",
+  "project_page": "https://github.com/djjudas21/puppet-monyog",
+  "issues_url": "https://github.com/djjudas21/puppet-monyog/issues",
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
+  ]
+}
+
