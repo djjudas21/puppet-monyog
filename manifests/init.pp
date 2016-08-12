@@ -1,9 +1,10 @@
 # Class: monyog
 class monyog (
   $package,
-  $basedir = '/usr/local/MONyog',
-  $inifile = "${basedir}/MONyog.ini",
-  $port    = 5555,
+  $basedir  = '/usr/local/MONyog',
+  $inifile  = "${basedir}/MONyog.ini",
+  $port     = 5555,
+  $firewall = false,
 ) {
 
   package { 'MONyog':
@@ -21,10 +22,12 @@ class monyog (
     notify  => Service['MONyogd'],
   }
 
-  firewall { '100-monyog':
-    proto  => 'tcp',
-    dport  => $port,
-    action => 'accept',
+  if $firewall {
+    firewall { '100-monyog':
+      proto  => 'tcp',
+      dport  => $port,
+      action => 'accept',
+    }
   }
 
   service { 'MONyogd':

@@ -27,10 +27,11 @@ This class accepts several parameters, shown here with their default values.
 
 ```
 class { 'monyog': {
-  package => 'http://repo.example.com/MONyog-6.5.4-0.x86_64.rpm',
-  basedir => '/usr/local/MONyog',
-  inifile => "${basedir}/MONyog.ini",
-  port    => 5555,
+  package  => 'http://repo.example.com/MONyog-6.5.4-0.x86_64.rpm',
+  basedir  => '/usr/local/MONyog',
+  inifile  => "${basedir}/MONyog.ini",
+  port     => 5555,
+  firewall => false,
 }
 ```
 
@@ -56,6 +57,11 @@ you shouldn't need to set it unless you've rolled your own RPM.
 
 TCP port that MONyog listens on. By default this is `5555` but you may prefer to set
 it to the standard web port `80`.
+
+### `firewall`
+
+Whether to manage the firewall rule using `puppetlabs/firewall`. Defaults to `false`
+so we don't accidentally clobber existing firewall config.
 
 
 ## Reference
