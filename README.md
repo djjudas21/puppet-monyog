@@ -3,11 +3,6 @@
 #### Table of Contents
 
 1. [Overview](#overview)
-2. [Module Description - What the module does and why it is useful](#module-description)
-3. [Setup - The basics of getting started with monyog](#setup)
-    * [What monyog affects](#what-monyog-affects)
-    * [Setup requirements](#setup-requirements)
-    * [Beginning with monyog](#beginning-with-monyog)
 4. [Usage - Configuration options and additional functionality](#usage)
 5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
 5. [Limitations - OS compatibility, etc.](#limitations)
@@ -15,46 +10,46 @@
 
 ## Overview
 
+This module installs MONyog from a local package and gives it a base config to allow
+it to start up. You will then need to configure it via the web GUI.
+
+Download the [MONyog package](https://www.webyog.com/product/monyog) from their website
+and place the package somewhere where it can be accessed - either on a local package
+repo or in the Puppet fileserver. Specify the path in the `package` parameter.
+
 A one-maybe-two sentence summary of what the module does/what problem it solves.
 This is your 30 second elevator pitch for your module. Consider including
 OS/Puppet version it works with.
 
-## Module Description
-
-If applicable, this section should have a brief description of the technology
-the module integrates with and what that integration enables. This section
-should answer the questions: "What does this module *do*?" and "Why would I use
-it?"
-
-If your module has a range of functionality (installation, configuration,
-management, etc.) this is the time to mention it.
-
-## Setup
-
-### What monyog affects
-
-* A list of files, packages, services, or operations that the module will alter,
-  impact, or execute on the system it's installed on.
-* This is a great place to stick any warnings.
-* Can be in list or paragraph form.
-
-### Setup Requirements **OPTIONAL**
-
-If your module requires anything extra before setting up (pluginsync enabled,
-etc.), mention it here.
-
-### Beginning with monyog
-
-The very basic steps needed for a user to get the module up and running.
-
-If your most recent release breaks compatibility or requires particular steps
-for upgrading, you may wish to include an additional section here: Upgrading
-(For an example, see http://forge.puppetlabs.com/puppetlabs/firewall).
-
 ## Usage
 
-Put the classes, types, and resources for customizing, configuring, and doing
-the fancy stuff with your module here.
+This class accepts several parameters, shown here with their default values.
+
+```
+class { 'monyog': {
+  basedir => '/usr/local/MONyog',
+  inifile => "${basedir}/MONyog.ini",
+  port    => 5555,
+}
+```
+
+### `basedir`
+
+Base install path of the RPM. Setting this parameter does **not** change where the RPM
+is installed - it must be set to point where the RPM installs. By default this is
+`/usr/local/MONyog` and you shouldn't need to set it unless you've rolled your own
+RPM.
+
+### `inifile`
+
+Default location of `MONyog.ini`. By default this is in `/usr/local/MONyog` and
+you shouldn't need to set it unless you've rolled your own RPM.
+
+### `port`
+
+TCP port that MONyog listens on. By default this is `5555` but you may prefer to set
+it to the standard web port `80`.
+
 
 ## Reference
 
