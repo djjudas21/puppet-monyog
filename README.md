@@ -14,8 +14,8 @@ This module installs MONyog from a local package and gives it a base config to a
 it to start up. You will then need to configure it via the web GUI.
 
 Download the [MONyog package](https://www.webyog.com/product/monyog) from their website
-and place the package somewhere where it can be accessed - either on a local package
-repo or in the Puppet fileserver. Specify the path in the `package` parameter.
+and place the package somewhere where it can be accessed - usually in a local package
+repo. Specify the path in the `package` parameter.
 
 A one-maybe-two sentence summary of what the module does/what problem it solves.
 This is your 30 second elevator pitch for your module. Consider including
@@ -27,11 +27,18 @@ This class accepts several parameters, shown here with their default values.
 
 ```
 class { 'monyog': {
+  package => 'http://repo.example.com/MONyog-6.5.4-0.x86_64.rpm',
   basedir => '/usr/local/MONyog',
   inifile => "${basedir}/MONyog.ini",
   port    => 5555,
 }
 ```
+
+### `package`
+
+Path to the MONyog package. You must download this from MONyog yourself and place it in
+a location where it can be accessed. Acceptable locations are
+[documented](https://docs.puppet.com/puppet/latest/reference/type.html#package-attribute-source).
 
 ### `basedir`
 
@@ -60,7 +67,8 @@ with things. (We are working on automating this section!)
 
 ## Limitations
 
-This is where you list OS compatibility, version compatibility, etc.
+The initial version of this module only supports systems which use the RPM package
+manager - i.e. Red Hat and compatible systems. Debian support is on the roadmap.
 
 ## Development
 

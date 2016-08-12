@@ -1,12 +1,15 @@
 # Class: monyog
 class monyog (
+  $package,
   $basedir = '/usr/local/MONyog',
   $inifile = "${basedir}/MONyog.ini",
   $port    = 5555,
 ) {
 
   package { 'MONyog':
-    ensure => installed,
+    ensure   => installed,
+    source   => $package,
+    provider => 'rpm',
   }
 
   ini_setting { 'Port':
