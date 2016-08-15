@@ -16,7 +16,7 @@ class monyog (
   ini_setting { 'Port':
     path    => $inifile,
     section => 'GENERAL',
-    setting => 'Port'
+    setting => 'Port',
     value   => $port,
     require => Package['MONyog'],
     notify  => Service['MONyogd'],
