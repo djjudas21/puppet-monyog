@@ -1,15 +1,17 @@
 # Class: monyog
 class monyog (
-  $package,
+  $package  = 'IderaSQLdmforMySQL',
+  $source,
+  $service  = 'MONyogd',
   $basedir  = '/usr/local/MONyog',
   $inifile  = "${basedir}/MONyog.ini",
   $port     = 5555,
   $firewall = false,
 ) {
 
-  package { 'MONyog':
+  package { $package:
     ensure   => installed,
-    source   => $package,
+    source   => $source,
     provider => 'rpm',
   }
 
@@ -18,8 +20,8 @@ class monyog (
     section => 'GENERAL',
     setting => 'Port',
     value   => $port,
-    require => Package['MONyog'],
-    notify  => Service['MONyogd'],
+    require => Package[$package],
+    notify  => Service[$service],
   }
 
   if $firewall {
@@ -30,10 +32,10 @@ class monyog (
     }
   }
 
-  service { 'MONyogd':
+  service { $service:
     ensure  => running,
     enable  => true,
-    require => Package['MONyog'],
+    require => Package[$package],
   }
 
 }
